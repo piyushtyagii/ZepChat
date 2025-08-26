@@ -8,15 +8,14 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { app,server } from './lib/socket.js'
 import path from 'path'
-import { fileURLToPath } from "url";
+
 app.use(cors({
   origin : "http://localhost:5173", // Allow requests from this origin
   credentials: true, // Allow cookies to be sent with requests
 }))
 
 const PORT = process.env.PORT ;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.resolve();
 app.use(cookieParser()); // Middleware to parse cookies
 
 app.use(express.json()); // Middleware to parse JSON bodies ..basically extract the fields fron req body
@@ -29,8 +28,8 @@ if (process.env.NODE_ENV === "production") { //if we are in production,join to f
   app.use(express.static(path.join(__dirname, "../frontend/dist"))); //statically serve the website using express
   //dist contains the whole frontend
 
-  app.get("*", (req, res) => { //catch all routes
-     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+  app.get("*", (req, res) => { //catch all route
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
 
