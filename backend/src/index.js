@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") { //if we are in production,join to f
   //dist contains the whole frontend
 
   app.get("*", (req, res) => { //if user tries to access any unknown link,return index.html
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
   });
 }
 
