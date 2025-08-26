@@ -27,8 +27,8 @@ if (process.env.NODE_ENV === "production") { //if we are in production,join to f
   app.use(express.static(path.join(__dirname, "../frontend/dist"))); //statically serve the website using express
   //dist contains the whole frontend
 
-  app.get("*", (req, res) => { //if user tries to access any unknown link,return index.html
-    res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
+  app.get("*", (req, res) => { //catch all routes
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
 
