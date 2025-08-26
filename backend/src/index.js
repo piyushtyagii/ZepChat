@@ -8,13 +8,15 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { app,server } from './lib/socket.js'
 import path from 'path'
+import { fileURLToPath } from "url";
 app.use(cors({
   origin : "http://localhost:5173", // Allow requests from this origin
   credentials: true, // Allow cookies to be sent with requests
 }))
 
 const PORT = process.env.PORT ;
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(cookieParser()); // Middleware to parse cookies
 
 app.use(express.json()); // Middleware to parse JSON bodies ..basically extract the fields fron req body
